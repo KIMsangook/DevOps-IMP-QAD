@@ -1,0 +1,10 @@
+.Id,
+.Pw {
+    width: 37.5rem;      /* 600px → 37.5rem */
+    height: 5rem;        /* 80px → 5rem */
+    border: 0.0625rem solid #ccc;  /* 1px → 0.0625rem */
+    border-radius: 0.3125rem;      /* 5px → 0.3125rem */
+    padding: 0 0.625rem;           /* 10px → 0.625rem */
+    font-size: 1rem;    /* 16px → 1rem */
+}
+

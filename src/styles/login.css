@@ -1,0 +1,37 @@
+
+.form-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 왼쪽 정렬 */
+  justify-content: center; /* 아래쪽으로 내리기 */
+  padding: 2rem;
+}
+
+.login-container {
+  display: flex;                 /* 1) 플렉스 컨테이너로 전환
+                                     - 자식(.logo-box, .form-box)이 가로(row)로 배치됨 (기본 방향)
+                                     - display:flex를 쓰면 justify-content, align-items 등으로 정렬 제어 가능 */
+  height: 100vh;                 /* 2) 화면(뷰포트) 전체 높이를 컨테이너 높이로 사용
+                                     - 이 덕분에 세로 중앙/하단 정렬이 화면 기준으로 작동 */
+  padding: 2rem;                 /* 3) 화면과 컨텐츠 사이의 여백(내부) 확보 */
+  gap: 2rem;                     /* 4) 자식 요소들 사이 간격(좌/우) 지정 - margin보다 깔끔함 */
+}
+
+.logo-box {
+  flex: 1;                       /* 1) flex:1 => flex-grow:1, flex-shrink:1, flex-basis:0(대체로)
+                                     - 의미: 남는 공간을 해당 요소들이 동일 비율로 나눠가짐
+                                     - 왜 쓰나: 좌/우 영역을 균등 분할하거나 비율 조절 시 편리 */
+  display: flex;                 /* 내부 컨텐츠(로고 이미지)를 가운데 배치하기 위해 내부도 flex로 설정 */
+  justify-content: center;       /* 수평 중앙 정렬(로고를 가로 중앙에 배치) */
+  align-items: center;           /* 수직 중앙 정렬(로고를 세로 중앙에 배치) */
+}
+
+.login {
+  width: 100%;
+  height: 100vh;              /* 뷰포트 전체 높이 */
+  background-color: #F8F6F3;  /* 원하는 배경색 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
