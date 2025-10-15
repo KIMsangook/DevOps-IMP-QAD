@@ -1,10 +1,7 @@
+import "../styles/Button.css";
 
-
-const Button = ( {className}) => {
-    return (
-        <button className={className} >로그인</button>
-
-    )
-}
+const Button = ({ text }) => {
+  return <button className="btn">{text}</button>;
+};
 
 export default Button;

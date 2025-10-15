@@ -1,44 +1,17 @@
- 
-import Input from '../components/input.jsx'
-import Button from '../components/Button.jsx'
-import '../styles/login.css'
-import '../styles/Input.css'
-import '../styles/Button.css'
-import logo from '../assets/Qadlogo.png'
+import Header from "../components/Header";
+import LoginCard from "../components/LoginCard";
+import "../styles/login.css";
 
 const Login = () => {
   return (
-    <div className="login">
- <div className="login-container">  
-
-    <div className="logo-box">
-        <img src={logo} alt="logo" />
-    </div> 
-
-
-     <div className="form-box">
-     <h4>ID</h4>
-      <Input
-        type="text"
-        placeholder="아이디"
-        className="id"
-       />
-
-
-    <h4>Password</h4>
-   <Input
-      type="password"
-      placeholder="비밀번호"
-      className="pw"
-    />
-
-    <Button 
-      className="login-button"
-    />
+    // 전체 페이지 컨테이너
+    <div className="login-page">
+      <Header />
+      <div className="login-container">
+        <LoginCard />
+      </div>
     </div>
-    </div>
-    </div>
-    )
-}
+  );
+};
 
-export default Login
+export default Login;

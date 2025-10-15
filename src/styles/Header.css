@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.header-img {
+  height: 50px;
+}
