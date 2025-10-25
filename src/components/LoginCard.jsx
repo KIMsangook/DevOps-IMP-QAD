@@ -1,20 +1,51 @@
-import Input from "../components/input.jsx";
-import Button from "../components/Button.jsx";
+import Input from "./Input.jsx";
+import Button from "./Button.jsx";
+import api, { setAuthToken } from "../api/axiosInstance.js";
+import { useState } from "react";
 import "../styles/logincard.css";
 import "../styles/Input.css";
-import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  // username 상태 선언: 초기값은 빈 문자열
-  const [username, setUsername] = useState("");
-  // password 상태 선언: 초기값은 빈 문자열
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
 
-  // 폼 제출 또는 버튼 클릭 시 호출되는 함수
-  const handleLogin = (e) => {
-    e.preventDefault(); // 기본 폼 제출 동작(페이지 새로고침)을 막음
-    // 실제로는 여기서 API 호출(예: axios.post('/api/login', { username, password })) 수행
-    console.log("로그인 시도:", username, password); // 개발 중 로그 출력
+  // 로그인 버튼 클릭 시 실행
+  const handleLogin = async (e) => {
+    e.preventDefault(); // ✅ 폼의 기본 제출(새로고침) 동작 막기
+
+    try {
+      const response = await api.post("/portal/auth/login", {
+        userId: id,
+        password: pw,
+      });
+
+      // 서버에서 받은 JWT 토큰
+      const token = response.data.token; // 실제 키 이름 확인 필요 (accessToken 등으로 바뀔 수도 있음)
+
+      // axios 기본 헤더에 토큰 설정
+      setAuthToken(token);
+
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem("token", token);
+
+      console.log("✅ 로그인 응답:", response.data);
+      alert("로그인 성공!");
+      navigate("/dashboard");
+    } catch (error) {
+      if (error.response) {
+        console.error(
+          "서버 응답 오류:",
+          error.response.status,
+          error.response.data
+        );
+      } else {
+        console.error("네트워크 오류:", error.message);
+      }
+      alert("로그인 실패. 콘솔을 확인하세요.");
+    }
   };
 
   return (
@@ -22,22 +53,19 @@ const Login = () => {
       <h2 className="login-title">Sign In</h2>
 
       <form onSubmit={handleLogin} className="login-form">
-        {/* 사용자명 입력: Input 컴포넌트에 value와 onChange 전달 */}
         ID
         <Input
-          placeholder="Username or Email" // 플레이스홀더
-          value={username} // 현재 상태값 바인딩
-          onChange={(e) => setUsername(e.target.value)} // 입력 변경 시 상태 업데이트
+          placeholder="Username or Email"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
         />
-        {/* 비밀번호 입력: type="password"로 마스킹 처리 */}
         PW
         <Input
-          type="password" // 비밀번호 입력 타입
+          type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // 입력 변경 시 상태 업데이트
+          value={pw}
+          onChange={(e) => setPw(e.target.value)}
         />
-        {/* 제출 버튼: type="submit"으로 폼 제출 트리거 */}
         <Button text="Sign In" type="submit" />
       </form>
     </div>
